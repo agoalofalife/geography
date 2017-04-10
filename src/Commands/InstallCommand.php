@@ -81,7 +81,7 @@ class InstallCommand extends Command
         ;
         $table->render();
 
-        $helper = $this->getHelper('question');
+        $helper   = $this->getHelper('question');
         $question = new ConfirmationQuestion("<question>Are you sure?? y/n</question>", false);
 
         if (!$helper->ask($input, $output, $question)) {

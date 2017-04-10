@@ -1,8 +1,9 @@
 <?php
 
-namespace agoalofalife\Contract;
+namespace agoalofalife\Contracts;
 
 interface ContractDataCollector
 {
     public function getData();
+
 }

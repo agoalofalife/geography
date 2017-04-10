@@ -1,6 +1,7 @@
 <?php
 
 namespace agoalofalife;
+use agoalofalife\Migrations\CountryMigration;
 use \Illuminate\Database\Capsule\Manager as Capsule;
 
 class CapsuleSettings
