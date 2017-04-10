@@ -5,5 +5,5 @@ namespace agoalofalife\Contracts;
 
 interface Checker
 {
-    public function check();
+    public function check(callable $callback);
 }

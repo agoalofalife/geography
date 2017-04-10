@@ -1,14 +1,14 @@
 <?php
 
 namespace agoalofalife;
-use agoalofalife\Migrations\CountryMigration;
+
 use \Illuminate\Database\Capsule\Manager as Capsule;
 
 class CapsuleSettings
 {
     protected $capsule;
 
-    public function __construct( Capsule $capsule)
+    public function __construct( Capsule $capsule )
     {
         $this->capsule = $capsule;
     }
@@ -28,6 +28,8 @@ class CapsuleSettings
 
         $this->capsule->setAsGlobal();
         $this->capsule->bootEloquent();
+
+
     }
 
 }

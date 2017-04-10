@@ -4,6 +4,7 @@ namespace agoalofalife;
 
 use agoalofalife\Migrations\CountryMigration;
 
+
 class ManagerMigrations
 {
     protected $migrations = [

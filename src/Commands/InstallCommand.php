@@ -3,6 +3,7 @@
 namespace agoalofalife\Commands;
 
 use agoalofalife\CapsuleSettings;
+use agoalofalife\Migrations\CountryMigration;
 use Illuminate\Database\Capsule\Manager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -92,6 +93,6 @@ class InstallCommand extends Command
 
 
         (new CapsuleSettings(new Manager()))->settings( $this->settings );
-
+        (new CountryMigration())->execute();
     }
 }
