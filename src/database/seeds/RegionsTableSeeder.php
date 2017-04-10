@@ -4,8 +4,9 @@ namespace agoalofalife\database\seeds;
 
 use GuzzleHttp\Client;
 use \Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Database\Seeder;
 
-class RegionsTableSeeder
+class RegionsTableSeeder extends Seeder
 {
     /**
      * Auto generated seed file.
