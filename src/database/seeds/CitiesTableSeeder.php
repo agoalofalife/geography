@@ -15,29 +15,44 @@ class CitiesTableSeeder extends Seeder
      */
     public function run(Client $client)
     {
-        $response = [];
-        $offset   = 0;
-        Capsule::table('regions')->get()->each(function ($item) use ($client, &$response, $offset){
+        $response  = [];
+        $offset    = 0;
+        $arrCities = [];
+        Capsule::table('regions')->get()->each(function ($item) use ($client, &$response, $offset, &$arrCities){
 
-            $url           = 'http://api.vk.com/method/database.getCities?v=5.5&country_id='
-                              . $item->country_id .'&region_id='
-                              . $item->id . '&need_all=1&offset='
-                              . $offset;
+//            $body          = $client->get($url)->getBody();
+//            $responseArray = json_decode($body, true);
+//            file_get_contents($methodUrl, false, $streamContext);
+            do {
+                $url           = 'http://api.vk.com/method/database.getCities?v=5.5&country_id='
+                                  . $item->country_id .'&region_id='
+                                  . $item->id . '&need_all=1&count=1000&offset='
+                                  . $offset;
 
-            $body          = $client->get($url)->getBody();
-            $responseArray = json_decode($body, true);
-            foreach ($responseArray['response']['items'] as &$iterator)
-            {
-                $response[] = [
-                    'id'         => $iterator['id'],
-                    'title'      => $iterator['title'],
-                    'area'       => isset($iterator['area']) ? $iterator['area'] : '',
-                    'region_id'  => $item->id
-                ];
+                $body          = $client->get($url)->getBody();
+                $responseArray = json_decode($body, true);
+                $response      = array_merge( $response,$responseArray['response']['items'] );
+                $offset        += 1000;
 
-            }
+            } while( ( count($responseArray['response']['items'])  > 0) );
+
+                foreach ($response as &$iterator)
+                {
+                    $arrCities[] = [
+                        'id'         => $iterator['id'],
+                        'title'      => $iterator['title'],
+                        'area'       => isset($iterator['area']) ? $iterator['area'] : '',
+                        'region_id'  => $item->id
+                    ];
+                }
+
+
+            Capsule::table('cities')->insert($arrCities);
+            $arrCities = [];
+            $response  = [];
         });
 
-        Capsule::table('cities')->insert($response);
+//        var_dump($arrCities);
+
     }
 }
