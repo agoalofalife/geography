@@ -16,10 +16,13 @@ class CitiesTableSeeder extends Seeder
     public function run(Client $client)
     {
         $response = [];
-        Capsule::table('regions')->get()->each(function ($item) use ($client, &$response){
+        $offset   = 0;
+        Capsule::table('regions')->get()->each(function ($item) use ($client, &$response, $offset){
+
             $url           = 'http://api.vk.com/method/database.getCities?v=5.5&country_id='
                               . $item->country_id .'&region_id='
-                              . $item->id . '&need_all1=1';
+                              . $item->id . '&need_all=1&offset='
+                              . $offset;
 
             $body          = $client->get($url)->getBody();
             $responseArray = json_decode($body, true);

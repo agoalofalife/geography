@@ -8,6 +8,7 @@ use agoalofalife\database\seeds\RegionsTableSeeder;
 use agoalofalife\Migrations\CitiesMigration;
 use agoalofalife\Migrations\CountryMigration;
 use agoalofalife\Migrations\RegionsMigration;
+use agoalofalife\Support\Config;
 use GuzzleHttp\Client;
 use Illuminate\Database\Capsule\Manager;
 
@@ -19,12 +20,23 @@ $settings = [
     'databaseUsername'   => 'root',
     'databasePassword'   => 'y2uDk7L3IP'
 ];
-(new CapsuleSettings(new Manager()))->settings( $settings );
-(new CountryMigration())->check(function($self){
-    $self->execute();
-});
 
-(new CountryTableSeeder())->run(new Client());
+$config = new Config();
+//$config->set('geography.locale=1');
+//dd($config->get('geography.locale'));
+//dd(env('geography.locale'));
+
+(new CapsuleSettings(new Manager()))->settings( $settings );
+
+//(new CountryMigration())->check(function($self){
+//    $self->execute();
+//});
+//
+//(new CountryTableSeeder())->run(new Client());
+
+
+
+
 
 
 //(new RegionsMigration())->check(function($self){
@@ -32,8 +44,8 @@ $settings = [
 //});
 //(new RegionsTableSeeder())->run(new Client());
 
-//(new CitiesMigration())->check(function($self){
-//    $self->execute();
-//});
-//
-//(new CitiesTableSeeder())->run(new Client());
+(new CitiesMigration())->check(function($self){
+    $self->execute();
+});
+
+(new CitiesTableSeeder())->run(new Client());

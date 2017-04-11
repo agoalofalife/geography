@@ -18,7 +18,7 @@ class RegionsTableSeeder extends Seeder
     {
         $response = [];
         Capsule::table('country')->get()->each(function ($item) use ($client, &$response){
-            $body          = $client->get('http://api.vk.com/method/database.getRegions?v=5.5&country_id=' . $item->id)->getBody();
+            $body          = $client->get('http://api.vk.com/method/database.getRegions?v=5.5&count=1000&country_id=' . $item->id)->getBody();
             $responseArray = json_decode($body, true);
             foreach ($responseArray['response']['items'] as &$iterator)
             {

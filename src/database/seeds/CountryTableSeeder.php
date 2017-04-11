@@ -13,11 +13,12 @@ class CountryTableSeeder extends Seeder
      * @param Client $client
      * @return void
      */
-    public function run(Client $client)
+    public function run( Client $client )
     {
-        $body     = $client->get('http://api.vk.com/method/database.getCountries?v=5.5&need_all=1')->getBody();
-        $response = json_decode($body, true);
+        $body      = $client->get('http://api.vk.com/method/database.getCountries?v=5.5&need_all=1&count=1000&lang='. env('geography.locale') . '&code=' .  env('geography.country'))->getBody();
+        $response  = json_decode($body, true);
 
-        Capsule::table('country')->insert($response['response']['items']);
+//        var_dump($response['response'], true);
+        Capsule::table('country')->insert( $response['response']['items'] );
     }
 }

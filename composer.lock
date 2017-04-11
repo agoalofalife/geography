@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "56497e4c121c22acd270fc485540709f",
-    "content-hash": "6f20a7c91dc223946eda835af9f65011",
+    "content-hash": "9f0c8231e411c17163f69f2c8960ce9a",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -406,12 +405,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "4177edb29de412ecb8916d0f3037929924467dec"
+                "reference": "31d5fcb71385a416a38cf81a46e8bfbf76b15a7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/4177edb29de412ecb8916d0f3037929924467dec",
-                "reference": "4177edb29de412ecb8916d0f3037929924467dec",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/31d5fcb71385a416a38cf81a46e8bfbf76b15a7d",
+                "reference": "31d5fcb71385a416a38cf81a46e8bfbf76b15a7d",
                 "shasum": ""
             },
             "require": {
@@ -454,7 +453,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2017-04-10 13:30:53"
+            "time": "2017-04-10 17:43:06"
         },
         {
             "name": "nesbot/carbon",
@@ -1066,7 +1065,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2017-01-26 22:05:40"
+            "time": "2017-01-26T22:05:40+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -1168,7 +1167,7 @@
                 }
             ],
             "description": "Library for handling version information and constraints",
-            "time": "2017-03-05 17:38:23"
+            "time": "2017-03-05T17:38:23+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -1267,7 +1266,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2016-09-30 07:12:33"
+            "time": "2016-09-30T07:12:33+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -1314,7 +1313,7 @@
                     "email": "me@mikevanriel.com"
                 }
             ],
-            "time": "2016-11-25 06:54:22"
+            "time": "2016-11-25T06:54:22+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -1528,7 +1527,7 @@
             "keywords": [
                 "template"
             ],
-            "time": "2015-06-21 13:50:34"
+            "time": "2015-06-21T13:50:34+00:00"
         },
         {
             "name": "phpunit/php-timer",
@@ -2383,7 +2382,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "illuminate/support": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

@@ -4,6 +4,8 @@ namespace agoalofalife\Commands;
 
 use agoalofalife\CapsuleSettings;
 use agoalofalife\Migrations\CountryMigration;
+use agoalofalife\Support\Config;
+use agoalofalife\Support\Local;
 use Illuminate\Database\Capsule\Manager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -25,6 +27,7 @@ class InstallCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $config = new Config();
         $output->writeln([
             'Hi let\'s start to do the migration!',
             '============',
@@ -91,8 +94,28 @@ class InstallCommand extends Command
 
         $output->writeln('<info>Then go ahead!</info>');
 
+        $helper = $this->getHelper('question');
+        $question = new ChoiceQuestion(
+            'Please choose local :',
+            array(0 => 'ru', 'en', 'ua', 'be', 'es', 'fi', 'de', 'it'),
+            0
+        );
+        $question->setErrorMessage('Local %s is invalid.');
 
-        (new CapsuleSettings(new Manager()))->settings( $this->settings );
-        (new CountryMigration())->execute();
+        $this->settings['localization'] = $helper->ask($input, $output, $question);
+
+        (new Local($config))->setLocal($this->settings['localization']);
+
+        $helper   = $this->getHelper('question');
+        $question = new Question("Enter <info> the country you wish to migrate</info>,  please : ");
+        $output->writeln('<comment>the list of countries you can see here 3166-1 alpha-2</comment>');
+        $output->writeln('<comment>example EN, RU</comment>');
+
+        $this->settings['country']     = $helper->ask($input, $output, $question);
+        $output->writeln( " You have just selected: <info>{$this->settings['country']} </info>");
+        $config->set('geography.country=' . $this->settings['country'] );
+
+//        (new CapsuleSettings(new Manager()))->settings( $this->settings );
+//        (new CountryMigration())->execute();
     }
 }

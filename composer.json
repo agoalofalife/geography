@@ -5,7 +5,8 @@
     "require": {
         "guzzlehttp/guzzle": "^6.2",
         "illuminate/database": "^5.4",
-        "symfony/console": "^3.2"
+        "symfony/console": "^3.2",
+        "illuminate/support": "^5.5@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.1",
@@ -21,7 +22,11 @@
     "autoload": {
         "psr-4": {
             "agoalofalife\\" : "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php",
+            "src/config.php"
+        ]
     },
     "scripts": {
         "geography install" : "php console geography install"
