@@ -1,15 +1,11 @@
 <?php
 namespace agoalofalife\Support;
 
-
-use agoalofalife\Contracts\ConfigContract;
 use agoalofalife\Contracts\LocalizationContract;
 use Mockery\Exception;
 
 class Local implements LocalizationContract
 {
-    private $config;
-
     protected $mapLocal = [
         'ru' => 0,
         'ua' => 1,
@@ -21,16 +17,11 @@ class Local implements LocalizationContract
         'it' => 7
     ];
 
-    public function __construct(ConfigContract $config)
-    {
-        $this->config = $config;
-    }
-
     public function setLocal($local)
     {
         if ( isset($this->mapLocal[$local]) )
         {
-            $this->config->set('geography.locale=' . $this->mapLocal[$local]);
+            config(['geography.locale' => $this->mapLocal[$local]]);
         } else{
             throw new Exception('not locale');
         }

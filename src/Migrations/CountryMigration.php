@@ -24,4 +24,14 @@ class CountryMigration implements ContractMigration, Checker
             call_user_func($callback, $this);
         }
     }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Capsule::schema()->drop('country');
+    }
 }

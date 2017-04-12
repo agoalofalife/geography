@@ -2,13 +2,17 @@
 
 namespace agoalofalife;
 
+use agoalofalife\Migrations\CitiesMigration;
 use agoalofalife\Migrations\CountryMigration;
+use agoalofalife\Migrations\RegionsMigration;
 
 
 class ManagerMigrations
 {
     protected $migrations = [
-        CountryMigration::class
+        CountryMigration::class,
+        RegionsMigration::class,
+        CitiesMigration::class
     ];
 
     public function builder()
@@ -23,4 +27,12 @@ class ManagerMigrations
         }
     }
 
+    public function destroyer()
+    {
+        foreach ($this->migrations as $migration)
+        {
+            $current =  new $migration();
+            $current->down();
+        }
+    }
 }

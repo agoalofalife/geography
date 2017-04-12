@@ -26,7 +26,7 @@ $settings = [
 
 (new CapsuleSettings(new Manager()))->settings( $settings );
 
-
+//
 //(new CountryMigration())->check(function($self){
 //    $self->execute();
 //});
@@ -42,5 +42,5 @@ $settings = [
 //(new CitiesMigration())->check(function($self){
 //    $self->execute();
 //});
-
+//
 (new CitiesTableSeeder())->run(new Client());

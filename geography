@@ -3,9 +3,12 @@
 require __DIR__.'/vendor/autoload.php';
 
 
+use agoalofalife\Commands\DropTablesCommand;
 use agoalofalife\Commands\InstallCommand;
+use agoalofalife\Kernel;
 use Symfony\Component\Console\Application;
-
+(new Kernel())->start();
 $application = new Application();
 $application->add(new InstallCommand());
+$application->add(new DropTablesCommand());
 $application->run();

@@ -12,7 +12,7 @@ class CitiesMigration implements ContractMigration, Checker
     {
         Capsule::schema()->create('cities', function ($table) {
             $table->increments('id');
-            $table->integer('region_id')->unsigned()->index();
+            $table->integer('region_id')->unsigned()->index()->nullable();
             $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');
             $table->string('title', 100);
             $table->string('area', 100);
@@ -27,5 +27,16 @@ class CitiesMigration implements ContractMigration, Checker
         {
             call_user_func($callback, $this);
         }
+    }
+
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Capsule::schema()->drop('cities');
     }
 }

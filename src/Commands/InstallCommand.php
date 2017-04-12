@@ -3,11 +3,12 @@
 namespace agoalofalife\Commands;
 
 use agoalofalife\CapsuleSettings;
-use agoalofalife\Migrations\CountryMigration;
-use agoalofalife\Support\Config;
+use agoalofalife\ManagerMigrations;
+use agoalofalife\ManagerSeeder;
 use agoalofalife\Support\Local;
 use Illuminate\Database\Capsule\Manager;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -27,11 +28,14 @@ class InstallCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $config = new Config();
+
+        $style = new OutputFormatterStyle('black', 'yellow', array('bold', 'blink'));
+        $output->getFormatter()->setStyle('fire', $style);
+//        $config = new Config();
+
         $output->writeln([
-            'Hi let\'s start to do the migration!',
-            '============',
-            '',
+            '<fire>Hi let\'s start to do the migration!</fire>',
+            '======================================'
         ]);
 
         $helper = $this->getHelper('question');
@@ -41,7 +45,7 @@ class InstallCommand extends Command
             0
         );
         $question->setErrorMessage('Database %s is invalid.');
-
+        // get type database
         $this->settings['databaseType'] = $helper->ask($input, $output, $question);
 
         $output->writeln('');
@@ -50,39 +54,45 @@ class InstallCommand extends Command
         $helper   = $this->getHelper('question');
         $question = new Question("Enter <info>host</info> for database , please : ", 'localhost');
 
+        // get host
         $this->settings['host']     = $helper->ask($input, $output, $question);
         $output->writeln( " You have just selected: <info>{$this->settings['host']} </info>");
 
+        $output->writeln('');
         $helper   = $this->getHelper('question');
         $question = new Question("Enter <info>database name</info>,  please : ");
 
+        // get name database
         $this->settings['databaseName']     = $helper->ask($input, $output, $question);
         $output->writeln( " You have just selected: <info>{$this->settings['databaseName']} </info>");
 
-
+        $output->writeln('');
         $helper   = $this->getHelper('question');
         $question = new Question("Enter <info>database username</info>,  please : ");
 
+        //get username in database
         $this->settings['databaseUsername']     = $helper->ask($input, $output, $question);
         $output->writeln( " You have just selected: <info>{$this->settings['databaseUsername']} </info>");
 
+        $output->writeln('');
         $helper   = $this->getHelper('question');
         $question = new Question("Enter <info>database password</info>,  please : ");
         $question->setHidden(true);
         $question->setHiddenFallback(false);
 
+        // get password
         $this->settings['databasePassword']    = $helper->ask($input, $output, $question);
-        $output->writeln( " You have just selected: <info>{$this->settings['databasePassword']} </info>");
 
-        $table = new Table($output);
-        $table->setHeaders(array('name', 'value'))
-            ->setRows(array(
-                array('Type database', $this->settings['databaseType']),
-                array('Host database', $this->settings['host']),
-                array('Name database', $this->settings['databaseName']),
-                array('Username database', $this->settings['databaseUsername'])
-            ))
-        ;
+
+         $table = new Table($output);
+         $table->setHeaders(array('name', 'value'))
+                ->setRows(array(
+                    array('Type database', $this->settings['databaseType']),
+                    array('Host database', $this->settings['host']),
+                    array('Name database', $this->settings['databaseName']),
+                    array('Username database', $this->settings['databaseUsername'])
+                ));
+
         $table->render();
 
         $helper   = $this->getHelper('question');
@@ -96,26 +106,37 @@ class InstallCommand extends Command
 
         $helper = $this->getHelper('question');
         $question = new ChoiceQuestion(
-            'Please choose local :',
+            'Please select your native language :',
             array(0 => 'ru', 'en', 'ua', 'be', 'es', 'fi', 'de', 'it'),
             0
         );
         $question->setErrorMessage('Local %s is invalid.');
 
+        // get native language
         $this->settings['localization'] = $helper->ask($input, $output, $question);
-
-        (new Local($config))->setLocal($this->settings['localization']);
+        (new Local())->setLocal($this->settings['localization']);
 
         $helper   = $this->getHelper('question');
         $question = new Question("Enter <info> the country you wish to migrate</info>,  please : ");
         $output->writeln('<comment>the list of countries you can see here 3166-1 alpha-2</comment>');
         $output->writeln('<comment>example EN, RU</comment>');
 
+        //  the list of countries that need to migrate
         $this->settings['country']     = $helper->ask($input, $output, $question);
         $output->writeln( " You have just selected: <info>{$this->settings['country']} </info>");
-        $config->set('geography.country=' . $this->settings['country'] );
+        config(['geography.country' =>  $this->settings['country'] ]);
 
-//        (new CapsuleSettings(new Manager()))->settings( $this->settings );
-//        (new CountryMigration())->execute();
+        // connection database
+        (new CapsuleSettings(new Manager()))->settings( $this->settings );
+
+        // migrate table
+        (new ManagerMigrations())->builder();
+
+        $output->writeln('<info>Successfully created table!</info>');
+
+        // seed data
+        (new ManagerSeeder())->run();
+
+        $output->writeln('<info>Successfully created all!</info>');
     }
 }
