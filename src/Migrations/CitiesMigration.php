@@ -29,7 +29,6 @@ class CitiesMigration implements ContractMigration, Checker
         }
     }
 
-
     /**
      * Reverse the migrations.
      *
@@ -37,6 +36,6 @@ class CitiesMigration implements ContractMigration, Checker
      */
     public function down()
     {
-        Capsule::schema()->drop('cities');
+        Capsule::schema()->dropIfExists('cities');
     }
 }

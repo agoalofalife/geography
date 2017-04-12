@@ -32,6 +32,6 @@ class CountryMigration implements ContractMigration, Checker
      */
     public function down()
     {
-        Capsule::schema()->drop('country');
+        Capsule::schema()->dropIfExists('country');
     }
 }

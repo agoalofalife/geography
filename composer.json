@@ -2,7 +2,13 @@
     "name": "agoalofalife/geography",
     "description": "",
     "type": "library",
+    "keywords": [
+        "geography",
+        "regions",
+        "city"
+    ],
     "require": {
+        "php": ">=5.6",
         "guzzlehttp/guzzle": "^6.2",
         "illuminate/database": "^5.4",
         "symfony/console": "^3.2",
@@ -29,7 +35,7 @@
         ]
     },
     "scripts": {
-        "geography install" : "php console geography install"
+        "test": "vendor/bin/phpunit --stop-on-failure --no-coverage"
     },
     "minimum-stability": "dev"
 }

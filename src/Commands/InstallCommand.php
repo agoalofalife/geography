@@ -15,6 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 
 class InstallCommand extends Command
@@ -119,6 +120,7 @@ class InstallCommand extends Command
         $helper   = $this->getHelper('question');
         $question = new Question("Enter <info> the country you wish to migrate</info>,  please : ");
         $output->writeln('<comment>the list of countries you can see here 3166-1 alpha-2</comment>');
+        $output->writeln('<comment>you can specify multiple countries separated by commas</comment>');
         $output->writeln('<comment>example EN, RU</comment>');
 
         //  the list of countries that need to migrate
@@ -126,17 +128,20 @@ class InstallCommand extends Command
         $output->writeln( " You have just selected: <info>{$this->settings['country']} </info>");
         config(['geography.country' =>  $this->settings['country'] ]);
 
+        $io = new SymfonyStyle($input, $output);
+        $io->progressStart(3);
+
         // connection database
         (new CapsuleSettings(new Manager()))->settings( $this->settings );
 
         // migrate table
         (new ManagerMigrations())->builder();
-
-        $output->writeln('<info>Successfully created table!</info>');
+        $io->progressAdvance(2);
+//        $output->writeln('<info>Successfully created table!</info>');
 
         // seed data
         (new ManagerSeeder())->run();
-
+        $io->progressFinish();
         $output->writeln('<info>Successfully created all!</info>');
     }
 }

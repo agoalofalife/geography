@@ -7,7 +7,7 @@ use Illuminate\Database\Schema\Blueprint;
 class Kernel
 {
     protected $bootstrapping = [
-        'config' => Repository::class
+        'config' => Repository::class,
     ];
 
     private function bootstrapping()

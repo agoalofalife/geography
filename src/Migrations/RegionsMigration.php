@@ -33,6 +33,6 @@ class RegionsMigration implements ContractMigration, Checker
      */
     public function down()
     {
-        Capsule::schema()->drop('regions');
+        Capsule::schema()->dropIfExists('regions');
     }
 }
