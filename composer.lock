@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f0c8231e411c17163f69f2c8960ce9a",
+    "content-hash": "2bb6c8d898b7824464f6dc1c1322d72f",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -253,6 +253,50 @@
                 "url"
             ],
             "time": "2017-03-20 17:10:46"
+        },
+        {
+            "name": "illuminate/config",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/config.git",
+                "reference": "836adec585b3729f8bfd6bfa8b123c9260a5cea0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/config/zipball/836adec585b3729f8bfd6bfa8b123c9260a5cea0",
+                "reference": "836adec585b3729f8bfd6bfa8b123c9260a5cea0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "5.5.*",
+                "illuminate/support": "5.5.*",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Config\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Illuminate Config package.",
+            "homepage": "https://laravel.com",
+            "time": "2017-02-04 21:26:36"
         },
         {
             "name": "illuminate/container",
@@ -2383,7 +2427,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "illuminate/support": 20
+        "illuminate/support": 20,
+        "illuminate/config": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

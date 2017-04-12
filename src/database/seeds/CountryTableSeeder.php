@@ -1,24 +1,23 @@
 <?php
 namespace agoalofalife\database\seeds;
 use \Illuminate\Database\Capsule\Manager as Capsule;
-use GuzzleHttp\Client;
 use Illuminate\Database\Seeder;
 
 
 class CountryTableSeeder extends Seeder
 {
+    protected $nameTable = 'country';
+
     /**
      * Auto generated seed file.
      *
-     * @param Client $client
      * @return void
      */
-    public function run( Client $client )
+    public function run()
     {
-        $body      = $client->get('http://api.vk.com/method/database.getCountries?v=5.5&need_all=1&count=1000&lang='. env('geography.locale') . '&code=' .  env('geography.country'))->getBody();
-        $response  = json_decode($body, true);
+          $body      = file_get_contents('http://api.vk.com/method/database.getCountries?v=5.5&need_all=1&count=1000&lang='. config('geography.locale') . '&code=' .  config('geography.country'));
+          $response  = json_decode($body, true);
 
-//        var_dump($response['response'], true);
-        Capsule::table('country')->insert( $response['response']['items'] );
+          Capsule::table( $this->nameTable )->insert( $response['response']['items'] );
     }
 }
