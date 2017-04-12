@@ -6,8 +6,6 @@ use Illuminate\Database\Seeder;
 
 class CountryTableSeeder extends Seeder
 {
-    protected $nameTable = 'country';
-
     /**
      * Auto generated seed file.
      *
@@ -18,6 +16,6 @@ class CountryTableSeeder extends Seeder
           $body      = file_get_contents('http://api.vk.com/method/database.getCountries?v=5.5&need_all=1&count=1000&lang='. config('geography.locale') . '&code=' .  config('geography.country'));
           $response  = json_decode($body, true);
 
-          Capsule::table( $this->nameTable )->insert( $response['response']['items'] );
+          Capsule::table( config('geography.nameTable.country') )->insert( $response['response']['items'] );
     }
 }

@@ -20,20 +20,17 @@ $settings = [
     'databaseUsername'   => 'root',
     'databasePassword'   => 'y2uDk7L3IP'
 ];
-
 (new Kernel())->start();
-dd(config('geography.locale'));
 
-//(new CapsuleSettings(new Manager()))->settings( $settings );
-//
+
+
+(new CapsuleSettings(new Manager()))->settings( $settings );
+
+
 //(new CountryMigration())->check(function($self){
 //    $self->execute();
 //});
-//
 //(new CountryTableSeeder())->run(new Client());
-
-
-
 
 
 
@@ -45,5 +42,5 @@ dd(config('geography.locale'));
 //(new CitiesMigration())->check(function($self){
 //    $self->execute();
 //});
-//
-//(new CitiesTableSeeder())->run(new Client());
+
+(new CitiesTableSeeder())->run(new Client());

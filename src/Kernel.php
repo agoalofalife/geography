@@ -2,22 +2,32 @@
 namespace agoalofalife;
 
 use Illuminate\Config\Repository;
+use Illuminate\Database\Schema\Blueprint;
 
 class Kernel
 {
-    public function setConfig()
+    protected $bootstrapping = [
+        'config' => Repository::class
+    ];
+
+    private function bootstrapping()
+    {
+        foreach ($this->bootstrapping as $abstract => $concrete)
+        {
+            app()->instance($abstract, new $concrete());
+        }
+    }
+
+    private function setConfig()
     {
         $configFile = require 'config.php';
-        $config     = new Repository();
+        app('config')->set('geography', $configFile);
 
-        $config->set('geography', $configFile);
-
-        app()->instance('config',  $config);
     }
 
     public function start()
     {
+        $this->bootstrapping();
         $this->setConfig();
-
     }
 }

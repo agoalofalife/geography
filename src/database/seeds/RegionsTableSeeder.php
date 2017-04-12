@@ -1,8 +1,6 @@
 <?php
 namespace agoalofalife\database\seeds;
 
-
-use GuzzleHttp\Client;
 use \Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Seeder;
 
@@ -11,15 +9,17 @@ class RegionsTableSeeder extends Seeder
     /**
      * Auto generated seed file.
      *
-     * @param Client $client
      * @return void
      */
-    public function run(Client $client)
+    public function run()
     {
         $response = [];
-        Capsule::table('country')->get()->each(function ($item) use ($client, &$response){
-            $body          = $client->get('http://api.vk.com/method/database.getRegions?v=5.5&count=1000&country_id=' . $item->id)->getBody();
+
+        Capsule::table( config('geography.nameTable.country') )->get()->each(function ($item) use ( &$response )
+        {
+            $body          = file_get_contents('http://api.vk.com/method/database.getRegions?v=5.5&count=1000&country_id=' . $item->id);
             $responseArray = json_decode($body, true);
+
             foreach ($responseArray['response']['items'] as &$iterator)
             {
                 $response[] = [
@@ -30,6 +30,6 @@ class RegionsTableSeeder extends Seeder
             }
         });
 
-        Capsule::table('regions')->insert($response);
+        Capsule::table(config('geography.nameTable.regions'))->insert($response);
     }
 }
