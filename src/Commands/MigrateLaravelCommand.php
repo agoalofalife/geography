@@ -23,6 +23,12 @@ class MigrateLaravelCommand extends Command
       'CitiesTableSeeder'  => 'CitiesTableSeeder.php'
     ];
 
+    protected $formatterStyle;
+    public function __construct(OutputFormatterStyle $formatterStyle)
+    {
+        $this->formatterStyle = $formatterStyle;
+    }
+
     protected function configure()
     {
         $this->setName('migrate:laravel')->setHelp('to migrate files to Laravel');
@@ -30,8 +36,7 @@ class MigrateLaravelCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $style = new OutputFormatterStyle('black', 'yellow', array('bold', 'blink'));
-        $output->getFormatter()->setStyle('fire', $style);
+        $output->getFormatter()->setStyle('fire', $this->formatterStyle);
 
         $output->writeln([
             '<fire>There is a migration in the project Laravel</fire>',

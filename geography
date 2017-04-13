@@ -8,10 +8,11 @@ use agoalofalife\Commands\InstallCommand;
 use agoalofalife\Commands\MigrateLaravelCommand;
 use agoalofalife\Kernel;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+
 (new Kernel())->start();
 
 $application = new Application();
 $application->add(new InstallCommand());
-$application->add(new DropTablesCommand());
-$application->add(new MigrateLaravelCommand());
+$application->add(new MigrateLaravelCommand(new OutputFormatterStyle('black', 'yellow', array('bold', 'blink'))));
 $application->run();
