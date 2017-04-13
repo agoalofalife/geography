@@ -24,9 +24,12 @@ class MigrateLaravelCommand extends Command
     ];
 
     protected $formatterStyle;
-    public function __construct(OutputFormatterStyle $formatterStyle)
+    protected $progressBar;
+
+    public function __construct(OutputFormatterStyle $formatterStyle, ProgressBar $bar)
     {
         $this->formatterStyle = $formatterStyle;
+        $this->progressBar    = $bar;
     }
 
     protected function configure()
@@ -43,12 +46,11 @@ class MigrateLaravelCommand extends Command
             '======================================'
         ]);
 
-        $progress = new ProgressBar($output,7);
-        $progress->start();
+        $this->progressBar->start();
 
-        $this->moveMigrate($progress);
-        $this->moveSeeders($progress);
-        $this->moveConfig($progress);
+        $this->moveMigrate( $this->progressBar );
+        $this->moveSeeders( $this->progressBar );
+        $this->moveConfig(  $this->progressBar );
 
         $progress->finish();
         $output->writeln(['']);

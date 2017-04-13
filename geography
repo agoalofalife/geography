@@ -3,16 +3,16 @@
 
 require $_SERVER["PWD"] . '/vendor/autoload.php';
 
-use agoalofalife\Commands\DropTablesCommand;
 use agoalofalife\Commands\InstallCommand;
 use agoalofalife\Commands\MigrateLaravelCommand;
 use agoalofalife\Kernel;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 (new Kernel())->start();
 
 $application = new Application();
 $application->add(new InstallCommand());
-$application->add(new MigrateLaravelCommand(new OutputFormatterStyle('black', 'yellow', array('bold', 'blink'))));
+$application->add( new MigrateLaravelCommand(new OutputFormatterStyle('black', 'yellow', array('bold', 'blink')) , new ProgressBar($output, 7)) );
 $application->run();
