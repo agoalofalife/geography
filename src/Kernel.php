@@ -2,7 +2,6 @@
 namespace agoalofalife;
 
 use Illuminate\Config\Repository;
-use Illuminate\Database\Schema\Blueprint;
 
 class Kernel
 {
