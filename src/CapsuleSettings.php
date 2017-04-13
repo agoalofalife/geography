@@ -29,7 +29,5 @@ class CapsuleSettings
         $this->capsule->setAsGlobal();
         $this->capsule->bootEloquent();
 
-
     }
-
 }

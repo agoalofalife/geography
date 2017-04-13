@@ -21,7 +21,6 @@ class Kernel
     {
         $configFile = require 'config.php';
         app('config')->set('geography', $configFile);
-
     }
 
     public function start()
