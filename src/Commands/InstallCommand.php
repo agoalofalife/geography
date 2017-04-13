@@ -3,6 +3,9 @@
 namespace agoalofalife\Commands;
 
 use agoalofalife\CapsuleSettings;
+use agoalofalife\database\seeds\CitiesTableSeeder;
+use agoalofalife\database\seeds\CountryTableSeeder;
+use agoalofalife\database\seeds\RegionsTableSeeder;
 use agoalofalife\ManagerMigrations;
 use agoalofalife\ManagerSeeder;
 use agoalofalife\Support\Local;
@@ -139,7 +142,11 @@ class InstallCommand extends Command
 //        $output->writeln('<info>Successfully created table!</info>');
 
         // seed data
-        (new ManagerSeeder())->run();
+        (new ManagerSeeder(array(
+            CountryTableSeeder::class,
+            RegionsTableSeeder::class,
+            CitiesTableSeeder::class
+        )))->run();
         $io->progressFinish();
         $output->writeln('<info>Successfully created all!</info>');
     }

@@ -2,18 +2,14 @@
 
 namespace agoalofalife;
 
-
-use agoalofalife\database\seeds\CitiesTableSeeder;
-use agoalofalife\database\seeds\CountryTableSeeder;
-use agoalofalife\database\seeds\RegionsTableSeeder;
-
 class ManagerSeeder
 {
-    protected $seeders = [
-        CountryTableSeeder::class,
-        RegionsTableSeeder::class,
-        CitiesTableSeeder::class
-    ];
+    protected $seeders;
+
+    public function __construct(array $seeders)
+    {
+        $this->seeders = $seeders;
+    }
 
     public function run()
     {
