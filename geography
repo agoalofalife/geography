@@ -5,6 +5,7 @@ require $_SERVER["PWD"] . '/vendor/autoload.php';
 
 use agoalofalife\Commands\DropTablesCommand;
 use agoalofalife\Commands\InstallCommand;
+use agoalofalife\Commands\MigrateLaravelCommand;
 use agoalofalife\Kernel;
 use Symfony\Component\Console\Application;
 (new Kernel())->start();
@@ -12,4 +13,5 @@ use Symfony\Component\Console\Application;
 $application = new Application();
 $application->add(new InstallCommand());
 $application->add(new DropTablesCommand());
+$application->add(new MigrateLaravelCommand());
 $application->run();

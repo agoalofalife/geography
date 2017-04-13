@@ -1,0 +1,34 @@
+<?php
+namespace agoalofalife\database\seeds;
+
+use Illuminate\Database\Seeder;
+
+class RegionsTableSeeder extends Seeder
+{
+    /**
+     * Auto generated seed file.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $response = [];
+
+        Db::table( config('geography.nameTable.country') )->get()->each(function ($item) use ( &$response )
+        {
+            $body          = file_get_contents('http://api.vk.com/method/database.getRegions?v=5.5&count=1000&country_id=' . $item->id);
+            $responseArray = json_decode($body, true);
+
+            foreach ($responseArray['response']['items'] as &$iterator)
+            {
+                $response[] = [
+                    'id'         => $iterator['id'],
+                    'title'      => $iterator['title'],
+                    'country_id' => $item->id
+                ];
+            }
+        });
+
+        Db::table(config('geography.nameTable.regions'))->insert($response);
+    }
+}

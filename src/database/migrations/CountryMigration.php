@@ -1,5 +1,5 @@
 <?php
-namespace agoalofalife\Migrations;
+namespace agoalofalife\database\migrations;
 
 use agoalofalife\Contracts\Checker;
 use agoalofalife\Contracts\ContractMigration;

@@ -2,10 +2,10 @@
 
 namespace agoalofalife;
 
-use agoalofalife\Migrations\CitiesMigration;
-use agoalofalife\Migrations\CountryMigration;
-use agoalofalife\Migrations\RegionsMigration;
 
+use agoalofalife\database\migrations\CitiesMigration;
+use agoalofalife\database\migrations\CountryMigration;
+use agoalofalife\database\migrations\RegionsMigration;
 
 class ManagerMigrations
 {

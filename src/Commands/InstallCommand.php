@@ -32,7 +32,6 @@ class InstallCommand extends Command
 
         $style = new OutputFormatterStyle('black', 'yellow', array('bold', 'blink'));
         $output->getFormatter()->setStyle('fire', $style);
-//        $config = new Config();
 
         $output->writeln([
             '<fire>Hi let\'s start to do the migration!</fire>',
