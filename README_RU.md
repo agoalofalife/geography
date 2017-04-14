@@ -131,3 +131,5 @@ Enter  the country you wish to migrate,  please :
  php artisan db:seed --class=RegionsTableSeeder
  php artisan db:seed --class=CitiesTableSeeder
  ```
+ 
+ После легко можно удалить пакет и не о чем не беспокоиться!
