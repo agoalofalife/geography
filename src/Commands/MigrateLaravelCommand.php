@@ -50,8 +50,16 @@ class MigrateLaravelCommand extends Command
         
         $this->progressBar->start();
 
-        $this->moveMigrate( $this->progressBar );
-        $this->moveSeeders( $this->progressBar );
+        $this->move( $this->progressBar, [
+            'inLaravel' => $_SERVER["PWD"] . '/database/migrations/',
+            'stubs'     => __DIR__ . '/../database/migrations/stubs/'
+        ], $this->listFileMigrations);
+
+        $this->move( $this->progressBar, [
+            'inLaravel' => $_SERVER["PWD"] . '/database/seeds/',
+            'stubs'     => __DIR__ . '/../database/seeds/stubs/'
+        ], $this->listFilesSeeder );
+
         $this->moveConfig(  $this->progressBar );
 
         $this->progressBar->finish();
@@ -59,35 +67,18 @@ class MigrateLaravelCommand extends Command
         $output->writeln(['<info>All successfully copied!</info>']);
     }
 
-    protected function moveMigrate(ProgressBar $progress)
+    protected function move(ProgressBar $progress, array $pathList, $fileData)
     {
-        $pathToMigrationsLaravel  =  $_SERVER["PWD"] . '/database/migrations/';
-        $pathToStubs              = __DIR__ . '/../database/migrations/stubs/';
+        $this->createDir($pathList['inLaravel']);
 
-        $this->createDir($pathToMigrationsLaravel);
-
-        foreach ($this->listFileMigrations as $name => $migrate)
+        foreach ($fileData as $name => $migrate)
         {
-            $fileName = $pathToMigrationsLaravel . $this->getDateNormalize() . $migrate . '.php';
-            file_put_contents($fileName, $this->getContent($pathToStubs . $name));
+            $fileName = $pathList['inLaravel'] . $this->getDateNormalize() . $migrate . '.php';
+            file_put_contents($fileName, $this->getContent($pathList['stubs'] . $name));
             $progress->advance();
         }
     }
 
-    protected function moveSeeders(ProgressBar $progress)
-    {
-        $pathToSeedersLaravel     =  $_SERVER["PWD"] . '/database/seeds/';
-        $pathToSeed               = __DIR__ . '/../database/seeds/stubs/';
-
-        $this->createDir($pathToSeedersLaravel);
-
-        foreach ($this->listFilesSeeder as $name => $seed)
-        {
-            $fileName = $pathToSeedersLaravel . $seed;
-            file_put_contents($fileName, $this->getContent($pathToSeed . $name));
-            $progress->advance();
-        }
-    }
 
     protected function moveConfig(ProgressBar $progress)
     {

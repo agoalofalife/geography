@@ -1,9 +1,10 @@
 
 **География регионов**
 
-[![Build Status](https://travis-ci.org/agoalofalife/geography.svg?branch=master)](https://travis-ci.org/agoalofalife/geography)[![License](https://poser.pugx.org/agoalofalife/geography/license)](https://packagist.org/packages/agoalofalife/geography)[![Twitter](https://img.shields.io/twitter/url/https/github.com/agoalofalife/geography.svg?style=social&style=plastic)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/agoalofalife/geography/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/agoalofalife/geography/?branch=master)[![Build Status](https://scrutinizer-ci.com/g/agoalofalife/geography/badges/build.png?b=master)](https://scrutinizer-ci.com/g/agoalofalife/geography/build-status/master)
+[![Build Status](https://travis-ci.org/agoalofalife/geography.svg?branch=master)](https://travis-ci.org/agoalofalife/geography)  [![License](https://poser.pugx.org/agoalofalife/geography/license)](https://packagist.org/packages/agoalofalife/geography)  [![Twitter](https://img.shields.io/twitter/url/https/github.com/agoalofalife/geography.svg?style=social&style=plastic)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)  [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/agoalofalife/geography/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/agoalofalife/geography/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/agoalofalife/geography/badges/build.png?b=master)](https://scrutinizer-ci.com/g/agoalofalife/geography/build-status/master)
 
 **Что это такое?**
+
 Этот пакет решает проблему с иерархией стран, регионов, населенных пунктов в вашей базе данных.
 За несколько команд в консоли, вы развернете все необходимые страны , вне зависимости от страны и языка.
 
@@ -11,9 +12,9 @@
 
 Для установки необходимо выполнить команду из composer
 
-    ```
+    
     composer require agoalofalife/geography
-    ```
+
     
 **Миграции данных**
 
@@ -85,13 +86,15 @@ Enter  the country you wish to migrate,  please :
 Поздравляю все успешно смигрированно!
 
 **Интеграция с Laravel**
+
  Так как среда Laravel использует для своих таблиц Seeder и Migration, мы можем свободно скопировать это в свой проект Laravel!
   
  ```
  vendor/bin/geography migrate:laravel  
  ```
- После команды вы уведите ваши файлы  в папке database, config.
- Для настройки вашего языка и стран которых вы хотите мигрировать, надо изменить конфигурационный файл в config/geography:
+ После команды вы уведите ваши файлы  в папке database и config.
+ 
+ Для настройки вашего языка и стран которых вы хотите мигрировать, надо изменить конфигурационный файл в config/geography.php :
  ```
  return [
      //     Your native language
