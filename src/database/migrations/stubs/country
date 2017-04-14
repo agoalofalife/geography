@@ -16,7 +16,7 @@ class ACreateTableCountry extends Migration
         Schema::create( config('geography.nameTable.country'), function (Blueprint $table) {
            $table->increments('id');
            $table->string('code')->nullable()->comments('unique value');
-           $table->string('name', 100);
+           $table->string('title', 100);
            $table->text('description')->nullable();
            $table->timestamps();
         });
