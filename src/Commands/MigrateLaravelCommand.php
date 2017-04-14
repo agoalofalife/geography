@@ -12,9 +12,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 class MigrateLaravelCommand extends Command
 {
     protected $listFileMigrations = [
-        'country' => '_create_table_country',
-        'regions' => '_create_table_regions',
-        'cities'  => '_create_table_cities'
+        'country' => '_Acreate_table_country',
+        'regions' => '_Bcreate_table_regions',
+        'cities'  => '_Ccreate_table_cities'
     ];
 
     protected $listFilesSeeder = [
