@@ -135,3 +135,6 @@ Next, you need to perform :
  ```
  
 After you can easily remove the package and what not to worry!
+
+
+[![yes](https://media.giphy.com/media/2RGhmKXcl0ViM/giphy.gif)
