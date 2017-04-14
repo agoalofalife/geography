@@ -12,6 +12,7 @@ class CountryMigration implements ContractMigration, Checker
         Capsule::schema()->create('country', function ($table) {
             $table->increments('id');
             $table->string('title', 100);
+            $table->string('code')->nullable()->comments('unique value');
             $table->text('description')->nullable();
             $table->timestamps();
         });

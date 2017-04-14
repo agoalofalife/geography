@@ -17,6 +17,7 @@ class CitiesMigration implements ContractMigration, Checker
             $table->string('title', 100);
             $table->string('area', 100);
             $table->text('description')->nullable();
+            $table->string('code')->nullable()->comments('unique value');
             $table->timestamps();
         });
     }

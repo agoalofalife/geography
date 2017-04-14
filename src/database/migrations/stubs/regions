@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableRegions extends Migration
+class BCreateTableRegions extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTableRegions extends Migration
      */
     public function up()
     {
-           Schema::create('regions', function ($table) {
+           Schema::create( config('geography.nameTable.regions'), function ($table) {
                     $table->increments('id');
                     $table->integer('country_id')->unsigned()->index();
                     $table->foreign('country_id')->references('id')->on('country')->onDelete('cascade');
@@ -30,6 +30,6 @@ class CreateTableRegions extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('regions');
+        Schema::dropIfExists( config('geography.nameTable.regions') );
     }
 }

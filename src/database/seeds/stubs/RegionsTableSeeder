@@ -1,5 +1,5 @@
 <?php
-namespace agoalofalife\database\seeds;
+
 
 use Illuminate\Database\Seeder;
 
@@ -14,7 +14,7 @@ class RegionsTableSeeder extends Seeder
     {
         $response = [];
 
-        Db::table( config('geography.nameTable.country') )->get()->each(function ($item) use ( &$response )
+        DB::table( config('geography.nameTable.country') )->get()->each(function ($item) use ( &$response )
         {
             $body          = file_get_contents('http://api.vk.com/method/database.getRegions?v=5.5&count=1000&country_id=' . $item->id);
             $responseArray = json_decode($body, true);
@@ -29,6 +29,6 @@ class RegionsTableSeeder extends Seeder
             }
         });
 
-        Db::table(config('geography.nameTable.regions'))->insert($response);
+        DB::table(config('geography.nameTable.regions'))->insert($response);
     }
 }

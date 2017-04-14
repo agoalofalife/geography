@@ -1,6 +1,5 @@
 <?php
 
-namespace agoalofalife\database\seeds;
 use Illuminate\Database\Seeder;
 
 class CitiesTableSeeder extends Seeder
@@ -55,7 +54,7 @@ class CitiesTableSeeder extends Seeder
                     $response      = array_merge($response, $responseArray['response']['items']);
                     $offset += 1000;
 
-                    DB::table('cities')->insert($arrCities);
+                    DB::table( config('geography.nameTable.cities') )->insert($arrCities);
                     $arrCities = [];
                 } while( ( count($responseArray['response']['items'])  > 0) );
             }

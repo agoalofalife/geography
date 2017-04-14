@@ -1,5 +1,5 @@
 <?php
-namespace agoalofalife\database\seeds;
+
 use Illuminate\Database\Seeder;
 
 

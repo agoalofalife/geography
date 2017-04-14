@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableCities extends Migration
+class CCreateTableCities extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateTableCities extends Migration
      */
     public function up()
     {
-        Schema::create('cities', function ($table) {
+        Schema::create( config('geography.nameTable.cities' ), function ($table) {
                 $table->increments('id');
                 $table->integer('region_id')->unsigned()->index()->nullable();
                 $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');
                 $table->string('title', 100);
                 $table->string('area', 100);
                 $table->text('description')->nullable();
+                $table->string('code')->nullable()->comments('unique value');
                 $table->timestamps();
             });
     }
@@ -31,6 +32,6 @@ class CreateTableCities extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cities');
+        Schema::dropIfExists( config('geography.nameTable.cities') );
     }
 }
