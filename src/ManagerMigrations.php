@@ -2,37 +2,21 @@
 
 namespace agoalofalife;
 
-
-use agoalofalife\database\migrations\CitiesMigration;
-use agoalofalife\database\migrations\CountryMigration;
-use agoalofalife\database\migrations\RegionsMigration;
-
 class ManagerMigrations
 {
-    protected $migrations = [
-        CountryMigration::class,
-        RegionsMigration::class,
-        CitiesMigration::class
-    ];
+    protected $migrations;
 
+    public function __construct(array $migrations)
+    {
+        $this->migrations = $migrations;
+    }
     public function builder()
     {
         foreach ($this->migrations as $migration)
         {
-           $current =  new $migration();
-
-           $current->check(function ($object){
+            $migration->check(function ($object){
                $object->execute();
            });
-        }
-    }
-
-    public function destroyer()
-    {
-        foreach ($this->migrations as $migration)
-        {
-            $current =  new $migration();
-            $current->down();
         }
     }
 }

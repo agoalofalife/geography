@@ -15,7 +15,7 @@ class ManagerSeeder
     {
         foreach ($this->seeders as $seeder)
         {
-            (new $seeder)->run();
+            $seeder->run();
         }
     }
 }
