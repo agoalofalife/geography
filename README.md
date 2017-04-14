@@ -1,4 +1,6 @@
 
+[EN](https://github.com/agoalofalife/geography/blob/master/README.md) | [RU](https://github.com/agoalofalife/geography/blob/master/README_RU.md)
+
 **The geography of the regions**
 
 [![Build Status](https://travis-ci.org/agoalofalife/geography.svg?branch=master)](https://travis-ci.org/agoalofalife/geography)  [![License](https://poser.pugx.org/agoalofalife/geography/license)](https://packagist.org/packages/agoalofalife/geography)  [![Twitter](https://img.shields.io/twitter/url/https/github.com/agoalofalife/geography.svg?style=social&style=plastic)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)  [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/agoalofalife/geography/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/agoalofalife/geography/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/agoalofalife/geography/badges/build.png?b=master)](https://scrutinizer-ci.com/g/agoalofalife/geography/build-status/master)
