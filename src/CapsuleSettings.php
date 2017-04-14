@@ -27,7 +27,11 @@ class CapsuleSettings
         ]);
 
         $this->capsule->setAsGlobal();
-        $this->capsule->bootEloquent();
 
+    }
+
+    public function connection()
+    {
+        return $this->capsule->getConnection('default');
     }
 }

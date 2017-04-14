@@ -28,8 +28,10 @@ class MigrateLaravelCommand extends Command
 
     public function __construct(OutputFormatterStyle $formatterStyle, ProgressBar $bar)
     {
+        parent::__construct();
         $this->formatterStyle = $formatterStyle;
         $this->progressBar    = $bar;
+        $this->progressBar->setFormat(' %current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%');
     }
 
     protected function configure()
@@ -43,16 +45,16 @@ class MigrateLaravelCommand extends Command
 
         $output->writeln([
             '<fire>There is a migration in the project Laravel</fire>',
-            '======================================'
+            ''
         ]);
-
+        
         $this->progressBar->start();
 
         $this->moveMigrate( $this->progressBar );
         $this->moveSeeders( $this->progressBar );
         $this->moveConfig(  $this->progressBar );
 
-        $progress->finish();
+        $this->progressBar->finish();
         $output->writeln(['']);
         $output->writeln(['<info>All successfully copied!</info>']);
     }
