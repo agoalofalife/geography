@@ -103,16 +103,17 @@ class InstallCommand extends Command
 
         $helper   = $this->getHelper('question');
         $question = new ConfirmationQuestion("<question>Are you sure?? y/n</question>", false);
-        // TODO check connection with database from choose parameters
-
 
         if (!$helper->ask($input, $output, $question)) {
             return;
         }
         // connection database
-        $capsule = (new CapsuleSettings(new Manager()))->settings( $this->settings );
-        dd(  $capsule->connection());
-        $output->writeln('<info>Then go ahead!</info>');
+        $capsule = new CapsuleSettings(new Manager());
+        $capsule->settings( $this->settings );
+        $capsule->checkConnection();
+
+
+        $output->writeln(['','', '<info>Then go ahead!</info>']);
 
         $helper = $this->getHelper('question');
         $question = new ChoiceQuestion(
@@ -139,8 +140,6 @@ class InstallCommand extends Command
 
         $io = new SymfonyStyle($input, $output);
         $io->progressStart(3);
-
-
 
         // migrate table
         (new ManagerMigrations([

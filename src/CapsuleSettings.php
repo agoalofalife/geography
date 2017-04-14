@@ -1,5 +1,4 @@
 <?php
-
 namespace agoalofalife;
 
 use \Illuminate\Database\Capsule\Manager as Capsule;
@@ -27,11 +26,18 @@ class CapsuleSettings
         ]);
 
         $this->capsule->setAsGlobal();
-
     }
 
-    public function connection()
+    /**
+     * Just check is exist connection with database
+     */
+    public function checkConnection()
     {
-        return $this->capsule->getConnection('default');
+        try{
+            is_a($this->capsule->getConnection()->getPdo(), \PDO::class );
+        } catch (\Exception $exception)
+        {
+           dd($exception->getMessage());
+        }
     }
 }

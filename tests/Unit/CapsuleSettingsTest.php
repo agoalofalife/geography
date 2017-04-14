@@ -18,7 +18,6 @@ class CapsuleSettingsTest extends TestCase
     {
         $this->capsule->shouldReceive('addConnection')->once();
         $this->capsule->shouldReceive('setAsGlobal')->once();
-        $this->capsule->shouldReceive('bootEloquent')->once();
 
         $settings = new CapsuleSettings($this->capsule);
         $settings->settings([

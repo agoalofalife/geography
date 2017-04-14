@@ -7,7 +7,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\ConsoleOutput;
-use Symfony\Component\Console\Tester\CommandTester;
+
 use Tests\TestCase;
 
 
@@ -41,4 +41,5 @@ class MigrateLaravelCommandTest extends TestCase
         $this->app->add( $this->command );
         $this->assertTrue($this->app->has('migrate:laravel'));
     }
+
 }
