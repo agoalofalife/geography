@@ -28,7 +28,7 @@ class InstallCommand extends Command
 {
     protected $settings;
 
-    protected function configure()
+    protected function configure() : void
     {
         $this->setName('install')->setHelp('Sets up tables with the regions, cities and so on..');
     }

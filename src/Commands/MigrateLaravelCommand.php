@@ -34,7 +34,7 @@ class MigrateLaravelCommand extends Command
         $this->progressBar->setFormat(' %current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%');
     }
 
-    protected function configure()
+    protected function configure() : void
     {
         $this->setName('migrate:laravel')->setHelp('to migrate files to Laravel');
     }
@@ -50,16 +50,8 @@ class MigrateLaravelCommand extends Command
         
         $this->progressBar->start();
 
-        $this->move( $this->progressBar, [
-            'inLaravel' => $_SERVER["PWD"] . '/database/migrations/',
-            'stubs'     => __DIR__ . '/../database/migrations/stubs/'
-        ], $this->listFileMigrations);
-
-        $this->move( $this->progressBar, [
-            'inLaravel' => $_SERVER["PWD"] . '/database/seeds/',
-            'stubs'     => __DIR__ . '/../database/seeds/stubs/'
-        ], $this->listFilesSeeder );
-
+        $this->moveMigrate( $this->progressBar );
+        $this->moveSeeders( $this->progressBar );
         $this->moveConfig(  $this->progressBar );
 
         $this->progressBar->finish();
@@ -67,20 +59,37 @@ class MigrateLaravelCommand extends Command
         $output->writeln(['<info>All successfully copied!</info>']);
     }
 
-    protected function move(ProgressBar $progress, array $pathList, $fileData)
+    protected function moveMigrate(ProgressBar $progress)
     {
-        $this->createDir($pathList['inLaravel']);
+        $pathToMigrationsLaravel  =  $_SERVER["PWD"] . '/database/migrations/';
+        $pathToStubs              = __DIR__ . '/../database/migrations/stubs/';
 
-        foreach ($fileData as $name => $migrate)
+        $this->createDir($pathToMigrationsLaravel);
+
+        foreach ($this->listFileMigrations as $name => $migrate)
         {
-            $fileName = $pathList['inLaravel'] . $this->getDateNormalize() . $migrate . '.php';
-            file_put_contents($fileName, $this->getContent($pathList['stubs'] . $name));
+            $fileName = $pathToMigrationsLaravel . $this->getDateNormalize() . $migrate . '.php';
+            file_put_contents($fileName, $this->getContent($pathToStubs . $name));
             $progress->advance();
         }
     }
 
+    protected function moveSeeders(ProgressBar $progress)
+    {
+        $pathToSeedersLaravel     =  $_SERVER["PWD"] . '/database/seeds/';
+        $pathToSeed               = __DIR__ . '/../database/seeds/stubs/';
 
-    protected function moveConfig(ProgressBar $progress)
+        $this->createDir($pathToSeedersLaravel);
+
+        foreach ($this->listFilesSeeder as $name => $seed)
+        {
+            $fileName = $pathToSeedersLaravel . $seed;
+            file_put_contents($fileName, $this->getContent($pathToSeed . $name));
+            $progress->advance();
+        }
+    }
+
+    protected function moveConfig(ProgressBar $progress) : void
     {
         $pathToConfig               = __DIR__ . '/../config.php';
         $pathToConfigsLaravel       =  $_SERVER["PWD"] . '/config/';
@@ -94,7 +103,7 @@ class MigrateLaravelCommand extends Command
      * Just create directory
      * @param $dir
      */
-    protected function createDir($dir)
+    protected function createDir(string $dir) : void
     {
         if (is_dir($dir) === false)
         {
@@ -107,7 +116,7 @@ class MigrateLaravelCommand extends Command
      * @param $nameFile
      * @return bool|string
      */
-    protected function getContent($nameFile)
+    protected function getContent(string $nameFile) : string
     {
         return file_get_contents($nameFile);
     }
@@ -116,7 +125,7 @@ class MigrateLaravelCommand extends Command
      * Get date normalize mow
      * @return mixed
      */
-    protected function getDateNormalize()
+    protected function getDateNormalize() : string
     {
         $date = Carbon::now();
         $date = preg_replace('/-|\s/','_', $date);

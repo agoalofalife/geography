@@ -17,7 +17,7 @@ class Local implements LocalizationContract
         'it' => 7
     ];
 
-    public function setLocal($local)
+    public function setLocal(string $local)
     {
         if ( isset($this->mapLocal[$local]) )
         {

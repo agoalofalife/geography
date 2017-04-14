@@ -10,7 +10,7 @@ class ManagerMigrations
     {
         $this->migrations = $migrations;
     }
-    public function builder()
+    public function builder() : void
     {
         foreach ($this->migrations as $migration)
         {

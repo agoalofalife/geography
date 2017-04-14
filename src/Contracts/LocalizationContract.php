@@ -5,5 +5,5 @@ namespace agoalofalife\Contracts;
 
 interface LocalizationContract
 {
-    public function setLocal($local);
+    public function setLocal(string $local);
 }

@@ -9,7 +9,7 @@ class Kernel
         'config' => Repository::class,
     ];
 
-    private function bootstrapping()
+    private function bootstrapping() : void
     {
         foreach ($this->bootstrapping as $abstract => $concrete)
         {
@@ -17,13 +17,13 @@ class Kernel
         }
     }
 
-    private function setConfig()
+    private function setConfig() : void
     {
         $configFile = require 'config.php';
         app('config')->set('geography', $configFile);
     }
 
-    public function start()
+    public function start() : void
     {
         $this->bootstrapping();
         $this->setConfig();

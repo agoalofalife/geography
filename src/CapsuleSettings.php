@@ -12,7 +12,7 @@ class CapsuleSettings
         $this->capsule = $capsule;
     }
 
-    public function settings( array $settings )
+    public function settings( array $settings ) : void
     {
         $this->capsule->addConnection([
             'driver'    => $settings['databaseType'],
@@ -31,7 +31,7 @@ class CapsuleSettings
     /**
      * Just check is exist connection with database
      */
-    public function checkConnection()
+    public function checkConnection() : void
     {
         try{
             is_a($this->capsule->getConnection()->getPdo(), \PDO::class );
