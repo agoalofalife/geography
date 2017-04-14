@@ -77,9 +77,9 @@ example EN, RU
 Enter  the country you wish to migrate,  please : 
 ```
 After some time, depending on the volume of information you will see in my database three tables : 
- - Страны
- - Регионы
- - Районы
+ - Country
+ - Regions
+ - Сities
  
 ```
  You have just selected: AU,BR 
