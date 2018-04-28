@@ -17,3 +17,5 @@ _ide_helper_models.php
 *.phar
 *.pid
 *.log
+
+./idea

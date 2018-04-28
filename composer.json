@@ -17,7 +17,7 @@
     "require": {
         "php": ">=7.1",
         "illuminate/database": "^5.2",
-        "symfony/console": "^3.2",
+        "symfony/console": "^4.0",
         "illuminate/support": "^5.2",
         "illuminate/config": "^5.2"
     },
