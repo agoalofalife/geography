@@ -13,7 +13,9 @@ class CountryTableSeeder extends Seeder
      */
     public function run()
     {
-          $body      = file_get_contents('http://api.vk.com/method/database.getCountries?v=5.5&need_all=1&count=1000&lang='. config('geography.locale') . '&code=' .  config('geography.country'));
+          $body = file_get_contents('https://api.vk.com/method/database.getCountries?v=5.5&need_all=1&count=1000&lang='.
+                      config('geography.locale') . '&code=' .  config('geography.country') . '&access_token=' .
+                      config('geography.access_token'));
           $response  = json_decode($body, true);
 
           Capsule::table( config('geography.nameTable.country') )->insert( $response['response']['items'] );
