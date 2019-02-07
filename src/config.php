@@ -21,5 +21,6 @@ return [
          'country' => 'country',
          'regions' => 'regions',
          'cities'  => 'cities'
-     ]
+     ],
+    'access_token' => ''
 ];
