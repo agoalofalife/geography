@@ -120,7 +120,8 @@ To configure your language and countries you want to migrate, you must change th
          'country' => 'country',
          'regions' => 'regions',
          'cities'  => 'cities'
-     ]
+     ],
+     'access_token' => ''
 ];
  ```
 Next, you need to perform :
