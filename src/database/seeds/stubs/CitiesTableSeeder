@@ -34,10 +34,10 @@ class CitiesTableSeeder extends Seeder
             {
                 do {
                     $body          = file_get_contents(
-                            'http://api.vk.com/method/database.getCities?v=5.5&country_id='
-                                     . $concreteCountry->id
-                                     . '&need_all=1&count=1000&offset='
-                                     . $offset);
+                        'https://api.vk.com/method/database.getCities?v=5.5&country_id='
+                        . $concreteCountry->id
+                        . '&need_all=1&count=1000&offset='
+                        . $offset . '&access_token=' . config('geography.access_token'));
 
                     $responseArray = json_decode($body, true);
 

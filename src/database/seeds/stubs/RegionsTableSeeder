@@ -16,7 +16,9 @@ class RegionsTableSeeder extends Seeder
 
         DB::table( config('geography.nameTable.country') )->get()->each(function ($item) use ( &$response )
         {
-            $body          = file_get_contents('http://api.vk.com/method/database.getRegions?v=5.5&count=1000&country_id=' . $item->id);
+            $body          = file_get_contents('https://api.vk.com/method/database.getRegions?v=5.5&count=1000&country_id=' . $item->id .
+                '&access_token=' . config('geography.access_token'));
+
             $responseArray = json_decode($body, true);
 
             foreach ($responseArray['response']['items'] as &$iterator)
